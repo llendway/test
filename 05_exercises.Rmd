@@ -17,7 +17,7 @@ output:
 
 ```{r libraries}
 library(tidyverse)     # for data cleaning and plotting
-library(googlesheets4) # for reading googlesheet data
+library(gardenR)       # for garden data
 library(lubridate)     # for date manipulation
 library(openintro)     # for the abbr2state() function
 library(palmerpenguins)# for Palmer penguin data
@@ -32,7 +32,6 @@ library(plotly)        # for the ggplotly() - basic interactivity
 library(gganimate)     # for adding animation layers to ggplots
 library(transformr)    # for "tweening" (gganimate)
 library(shiny)         # for creating interactive apps
-gs4_deauth()           # To not have to authorize each time you knit.
 theme_set(theme_minimal())
 ```
 
@@ -106,7 +105,9 @@ garden_harvest %>%
   group_by(date, variety) %>% 
   summarize(daily_harvest_lb = sum(weight)*0.00220462) %>% 
   ungroup() %>% 
-  complete(variety, date, fill = list(daily_harvest_lb = 0))
+  complete(variety, date, fill = list(daily_harvest_lb = 0)) %>% 
+  ggplot() +
+  geom_area(aes(x = date, y = daily_harvest_lb, fill = variety))
 ```
 
 
