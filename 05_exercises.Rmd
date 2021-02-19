@@ -107,7 +107,8 @@ garden_harvest %>%
   ungroup() %>% 
   complete(variety, date, fill = list(daily_harvest_lb = 0)) %>% 
   ggplot() +
-  geom_area(aes(x = date, y = daily_harvest_lb, fill = variety))
+  geom_area(aes(x = date, y = daily_harvest_lb, fill = variety)) +
+  labs(title = "look, a cool title")
 ```
 
 
